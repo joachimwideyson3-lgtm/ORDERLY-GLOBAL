@@ -16,7 +16,31 @@ function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;",
 function escapeAttr(s){return escapeHtml(s);}
 function setLang(v){lang=v;document.documentElement.lang=v;document.querySelectorAll("[data-i18n]").forEach(el=>{const key=el.dataset.i18n;if(translations[v][key])el.innerHTML=translations[v][key];});$("#installBtn").textContent=v==="fr"?"Installer":"Install";render();}
 $("#language").addEventListener("change",e=>setLang(e.target.value));
-$("#orderForm").addEventListener("submit",e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.target));orders.unshift({...d,id:Date.now(),date:new Date().toISOString(),status:"pending"});save();render();e.target.reset();$("#formMessage").textContent=t("sent");});
+$("#orderForm").addEventListener("submit", e => {
+  e.preventDefault();
+
+  const d = Object.fromEntries(new FormData(e.target));
+
+  const message = 
+`🛒 NOUVELLE COMMANDE - ORDERLY GLOBAL
+
+👤 Nom: ${d.name || ""}
+📞 Contact: ${d.contact || ""}
+📦 Produit: ${d.product || ""}
+🔢 Quantité: ${d.quantity || ""}
+💰 Budget: ${d.budget || ""}
+📝 Détails: ${d.details || ""}
+
+Merci d'avoir choisi ORDERLY GLOBAL.`;
+
+  const whatsappURL =
+    "https://wa.me/50955468020?text=" +
+    encodeURIComponent(message);
+
+  window.open(whatsappURL, "_blank");
+
+  e.target.reset();
+});
 $("#clearBtn").addEventListener("click",()=>{if(confirm(t("confirmClear"))){orders=[];save();render();$("#formMessage").textContent=t("deleted");}});
 $("#exportBtn").addEventListener("click",()=>{const rows=[["ID","Name","Contact","Product","Quantity","Budget","Details","Status","Date"],...orders.map(o=>[o.id,o.name,o.contact,o.product,o.quantity,o.budget,o.details,o.status,o.date])];const csv=rows.map(r=>r.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="orderly-global-orders.csv";a.click();URL.revokeObjectURL(a.href);});
 let deferredPrompt;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;$("#installBtn").hidden=false;});
