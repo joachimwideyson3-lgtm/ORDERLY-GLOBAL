@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="ORDERLY GLOBAL — Your Order, Our Priority.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>ORDERLY GLOBAL</title>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#"><span class="brand-mark">O</span><span>ORDERLY <b>GLOBAL</b><small>Your Order, Our Priority.</small></span></a>
+  <div class="head-actions">
+    <select id="language" aria-label="Language"><option value="fr">FR</option><option value="en">EN</option></select>
+    <button id="installBtn" class="btn outline" hidden>Installer</button>
+  </div>
+</header>
+<main>
+  <section class="hero">
+    <p class="eyebrow" data-i18n="eyebrow">VOTRE SERVICE DE COMMANDE EN LIGNE</p>
+    <h1 data-i18n="headline">Vous choisissez.<br><span>Nous nous occupons du reste.</span></h1>
+    <p class="lead" data-i18n="intro">Envoyez-nous les détails de votre achat. Notre équipe vous accompagne à chaque étape.</p>
+    <a href="#request" class="btn primary" data-i18n="start">Faire une demande</a>
+  </section>
+
+  <section class="features">
+    <article><span>01</span><h3 data-i18n="f1title">Envoyez votre demande</h3><p data-i18n="f1">Partagez le lien du produit et les détails souhaités.</p></article>
+    <article><span>02</span><h3 data-i18n="f2title">Recevez une confirmation</h3><p data-i18n="f2">Nous étudions votre demande et vous recontactons.</p></article>
+    <article><span>03</span><h3 data-i18n="f3title">Suivez votre commande</h3><p data-i18n="f3">Consultez le statut de votre demande.</p></article>
+  </section>
+
+  <section class="panel" id="request">
+    <div class="section-heading"><p class="eyebrow" data-i18n="formeyebrow">COMMENÇONS</p><h2 data-i18n="formtitle">Nouvelle demande</h2><p data-i18n="formdesc">Remplissez les informations ci-dessous.</p></div>
+    <form id="orderForm">
+      <div class="form-grid">
+        <label><span data-i18n="name">Nom complet</span><input name="name" required maxlength="90" placeholder="Votre nom"></label>
+        <label><span data-i18n="contact">Téléphone ou WhatsApp</span><input name="contact" required maxlength="40" placeholder="+509 ..."></label>
+        <label class="wide"><span data-i18n="product">Lien du produit / site web</span><input name="product" type="url" required placeholder="https://..."></label>
+        <label><span data-i18n="quantity">Quantité</span><input name="quantity" type="number" min="1" value="1" required></label>
+        <label><span data-i18n="budget">Budget estimé (facultatif)</span><input name="budget" maxlength="60" placeholder="Ex. 50 USD"></label>
+        <label class="wide"><span data-i18n="details">Détails supplémentaires</span><textarea name="details" rows="4" maxlength="1000" placeholder="Taille, couleur, modèle..."></textarea></label>
+      </div>
+      <button class="btn primary" type="submit" data-i18n="send">Envoyer la demande</button>
+      <p class="hint" data-i18n="localnote">Prototype : les demandes sont enregistrées sur cet appareil uniquement.</p>
+      <p id="formMessage" role="status" class="message"></p>
+    </form>
+  </section>
+
+  <section class="panel">
+    <div class="section-heading"><p class="eyebrow" data-i18n="trackingeyebrow">ESPACE CLIENT</p><h2 data-i18n="tracking">Mes demandes</h2></div>
+    <div id="customerOrders" class="empty" data-i18n="empty">Aucune demande pour le moment.</div>
+  </section>
+
+  <section class="panel admin">
+    <div class="section-heading"><p class="eyebrow">ADMIN</p><h2 data-i18n="admin">Administration</h2><p data-i18n="adminhint">Zone de démonstration locale — pas encore protégée par un compte.</p></div>
+    <div class="admin-tools"><button id="exportBtn" class="btn outline" data-i18n="export">Exporter CSV</button><button id="clearBtn" class="btn danger" data-i18n="clear">Effacer les données locales</button></div>
+    <div id="adminOrders" class="empty" data-i18n="empty">Aucune demande pour le moment.</div>
+  </section>
+</main>
+<footer><b>ORDERLY GLOBAL</b><span>Your Order, Our Priority.</span><small>Créé par J. Wideyson</small></footer>
+<script src="app.js"></script>
+</body>
+</html>
