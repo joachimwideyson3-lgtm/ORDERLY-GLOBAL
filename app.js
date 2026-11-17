@@ -1,4 +1,23 @@
-const $=s=>document.querySelector(s);
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDej0LGlWoHSKt2tyCq8pCyIO7eyafuyqM",
+  authDomain: "orderly-global.firebaseapp.com",
+  projectId: "orderly-global",
+  storageBucket: "orderly-global.firebasestorage.app",
+  messagingSenderId: "402248667775",
+  appId: "1:402248667775:web:4026e6dcaa147f6058a54a"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);const $=s=>document.querySelector(s);
 const translations={
 fr:{eyebrow:"VOTRE SERVICE DE COMMANDE EN LIGNE",headline:'Vous choisissez.<br><span>Nous nous occupons du reste.</span>',intro:"Envoyez-nous les détails de votre achat. Notre équipe vous accompagne à chaque étape.",start:"Faire une demande",f1title:"Envoyez votre demande",f1:"Partagez le lien du produit et les détails souhaités.",f2title:"Recevez une confirmation",f2:"Nous étudions votre demande et vous recontactons.",f3title:"Suivez votre commande",f3:"Consultez le statut de votre demande.",formeyebrow:"COMMENÇONS",formtitle:"Nouvelle demande",formdesc:"Remplissez les informations ci-dessous.",name:"Nom complet",contact:"Téléphone ou WhatsApp",product:"Lien du produit / site web",quantity:"Quantité",budget:"Budget estimé (facultatif)",details:"Détails supplémentaires",send:"Envoyer la demande",localnote:"Prototype : les demandes sont enregistrées sur cet appareil uniquement.",trackingeyebrow:"ESPACE CLIENT",tracking:"Mes demandes",empty:"Aucune demande pour le moment.",admin:"Administration",adminhint:"Zone de démonstration locale — pas encore protégée par un compte.",export:"Exporter CSV",clear:"Effacer les données locales",sent:"Votre demande a été enregistrée sur cet appareil.",pending:"Reçue",approved:"Acceptée",shipping:"En cours",delivered:"Livrée",cancelled:"Annulée",change:"Statut",confirmClear:"Effacer toutes les demandes enregistrées sur cet appareil ?",deleted:"Données locales effacées."},
 en:{eyebrow:"YOUR ONLINE ORDERING SERVICE",headline:'You choose.<br><span>We take care of the rest.</span>',intro:"Send us the details of your purchase. Our team will guide you at every step.",start:"Place a request",f1title:"Send your request",f1:"Share the product link and the details you need.",f2title:"Get confirmation",f2:"We review your request and get back to you.",f3title:"Track your order",f3:"Check the status of your request.",formeyebrow:"LET'S START",formtitle:"New request",formdesc:"Fill in the information below.",name:"Full name",contact:"Phone or WhatsApp",product:"Product / website link",quantity:"Quantity",budget:"Estimated budget (optional)",details:"Additional details",send:"Send request",localnote:"Prototype: requests are stored on this device only.",trackingeyebrow:"CUSTOMER AREA",tracking:"My requests",empty:"No requests yet.",admin:"Administration",adminhint:"Local demo area — not yet protected by an account.",export:"Export CSV",clear:"Clear local data",sent:"Your request has been saved on this device.",pending:"Received",approved:"Accepted",shipping:"In progress",delivered:"Delivered",cancelled:"Cancelled",change:"Status",confirmClear:"Delete all requests saved on this device?",deleted:"Local data cleared."}
